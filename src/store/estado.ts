@@ -1,8 +1,8 @@
-import { create } from "zustand";
+import { create } from "zustand"; // lib responsável por gerenciamento de estados
 
-import axios from 'axios'
+import axios from 'axios' // lib responsável pela comunicação entre o front e a api
 
-// tipo para o estado
+// definindo o tipo para o estado
 interface Estado {
   uid: number;
   uf: string;
@@ -37,16 +37,19 @@ const api = axios.create({
   baseURL: 'https://covid19-brazil-api.now.sh'
 });
 
+// Função para criar o estado e as funções associadas
 export const useEstadosStore = create<EstadoStore>((set) => ({
   estados: [],  
   sum: { cases: 0, deaths: 0, suspects: 0 }, // inicializa com valores padrão  
   getEstados: async () => {
     try {     
 
+      // realiza um GET no end-point da api
       const response = await api.get('/api/report/v1');
 
       const data = response.data.data;
 
+      // lógica simples para um resumo dos dados obtidos
       var sum1 = 0;
       var sum2 = 0;
       var sum3 = 0;
@@ -65,6 +68,7 @@ export const useEstadosStore = create<EstadoStore>((set) => ({
   }
 }));
 
+// Função para criar o estado e as funções associadas
 export const useEstadosDataStore = create<EstadoDataStore>((set) => ({
   estados: [],  
   sum: { cases: 0, deaths: 0, suspects: 0 }, // inicializa com valores padrão  
@@ -76,6 +80,7 @@ export const useEstadosDataStore = create<EstadoDataStore>((set) => ({
         return
       }
 
+      // remove os hifens da data obtida pelo input
       const newDate = dt.replace(/-/g, '');
 
       const response = await api.get('/api/report/v1/brazil/' + newDate);      
@@ -87,6 +92,7 @@ export const useEstadosDataStore = create<EstadoDataStore>((set) => ({
         return        
       }
 
+      // lógica simples para um resumo dos dados obtidos
       var sum1 = 0;
       var sum2 = 0;
       var sum3 = 0;

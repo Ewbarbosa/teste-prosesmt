@@ -1,6 +1,6 @@
-import { create } from 'zustand'
+import { create } from 'zustand' // lib responsável por gerenciamento de estados
 
-import axios from 'axios'
+import axios from 'axios' // lib responsável pela comunicação entre o front e a api
 
 interface Countries {
   country: string;
@@ -26,6 +26,7 @@ const api = axios.create({
   baseURL: 'https://covid19-brazil-api.now.sh'
 });
 
+// funcao para criar o estado e as funções associadas
 export const useCountriesStore = create<CountriesStore>((set) => ({
   countries: [],
   sum: { confirmed: 0, deaths: 0, updated_at: '' },
@@ -35,9 +36,9 @@ export const useCountriesStore = create<CountriesStore>((set) => ({
 
     const data = response.data.data;
 
+    // lógica para exibir um resumo dos dados obtidos
     var sum1 = 0;
-    var sum2 = 0;
-    var newDate = new Date();
+    var sum2 = 0;    
 
     for (let i = 0; i <= data.length - 1; i++) {
       sum1 = sum1 + data[i].confirmed;

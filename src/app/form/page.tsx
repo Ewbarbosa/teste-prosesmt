@@ -2,8 +2,10 @@
 
 import styles from './page.module.scss'
 
+// importação dos componentes
 import Header from "@/components/Header/page";
 import Input from '@/components/Input/page';
+
 import { ChangeEvent, FormEvent } from 'react';
 
 import { useState } from 'react';
@@ -20,8 +22,9 @@ interface FormData {
 export default function Form() {
 
   function handle(event: FormEvent) {
-    event.preventDefault();
+    event.preventDefault(); // evita o carregamento da página
 
+    // se os campos não forem preenchidos exibe um alerta e cancela a execução
     if (estado === '' || casos === '' || confirmados === '' || mortos === '' || recuperados === '' || data === '') {
       alert('Preencha todos os campos!')
       return
@@ -36,6 +39,7 @@ export default function Form() {
       data: data
     };
 
+    // converte os dados para json e formata para melhor visualização
     const jsonData = JSON.stringify(formData, null, 2);
 
     alert('Dados enviados: \n' + jsonData);

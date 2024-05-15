@@ -2,14 +2,16 @@
 
 import styles from './page.module.scss'
 
+// 
 import { useEstadosStore } from '@/store/estado';
 
 import { useEffect } from 'react';
 
 export default function Section1() {
 
-  const { estados, sum, getEstados } = useEstadosStore();
+  const { estados, sum, getEstados } = useEstadosStore(); // 
 
+  // utilizando o hook para carregar os dados
   useEffect(() => {
     getEstados();
 
@@ -34,6 +36,8 @@ export default function Section1() {
             </thead>
 
             <tbody>
+
+              {/* realizando um map para percorrer a lista de estados */}
               {estados.map(item => (
                 <tr key={item.uid}>
                   <td className={styles.td}>{item.state}</td>
@@ -45,6 +49,7 @@ export default function Section1() {
             </tbody>
           </table>
 
+              {/* exibe um resumo da tabela acima */}
           <div className={styles.card}>
             <h3 className={styles.cardItem}>Casos: {sum.cases.toLocaleString()}</h3>
             <h3 className={styles.cardItem}>Mortes: {sum.deaths.toLocaleString()}</h3>

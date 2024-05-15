@@ -1,5 +1,7 @@
 import styles from './page.module.scss'
 
+// componente criado para o HEADER da página
+
 export default function Header() {
   return (
     <>

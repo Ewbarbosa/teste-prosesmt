@@ -1,10 +1,6 @@
 import styles from './page.module.scss'
 
-import { InputHTMLAttributes, ReactNode} from 'react'
-
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  children: ReactNode;
-}
+// componente criado para ser reutilizado no formulário
 
 export default function Input({...rest}) {
   return (
